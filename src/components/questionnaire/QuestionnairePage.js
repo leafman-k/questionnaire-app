@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionnaireForm from './QuestionnaireForm'
 import questionnaireApi from '../../api/mockQuestionnaireApi'
+import {Button} from 'react-bootstrap'
 import toastr from 'toastr'
 class QuestionnairePage extends Component{
 
@@ -8,11 +9,12 @@ class QuestionnairePage extends Component{
     super(props)
     this.state = {
       questionnaire: {},
-      currentPage: {},
+      currentPage: null,
       pageIndex: 0
     }
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
+    this.updateAnswer = this.updateAnswer.bind(this)
   }
   componentDidMount(){
     questionnaireApi.getQuestionnaireById(1).then(questionnaire => {
@@ -21,6 +23,19 @@ class QuestionnairePage extends Component{
     }).catch(error =>{
       toastr.error(error)
     })
+  }
+  updateAnswer(event){
+    const field = event.target.name;
+    const value = event.target.value;
+    const page = Object.assign({},this.state.currentPage)
+    const item = page.questions.filter(question => question.questionId === field)
+    if(item){
+      const question = item[0]
+      question.answer = value
+      const elementIndex = page.questions.findIndex(question => question.questionId === field)
+      page.questions.splice(elementIndex, 1, question)
+      this.setState({currentPage: page})
+    }
   }
   nextPage(){
     let pageIndex = this.state.pageIndex + 1
@@ -36,12 +51,14 @@ class QuestionnairePage extends Component{
   render() {
     const page = this.state.currentPage
     return (
-      <div>
+      <div className="container-fluid">
       <h1>Questionnaire app</h1>
-        <h3>{page.descriptions}</h3>
-      <QuestionnaireForm page={page}/>
-      <button onClick={this.previousPage}>Previous</button>
-      <button onClick={this.nextPage}>Next</button>
+      <div className="row">
+      {page && <QuestionnaireForm questions={page.questions} onchange={this.updateAnswer}/>}
+
+      <Button bsStyle="primary" onClick={this.previousPage}>Previous</Button>
+      <Button bsStyle="primary" onClick={this.nextPage}>Next</Button>
+      </div>
       </div>
     )
   }

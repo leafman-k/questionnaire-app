@@ -10,8 +10,25 @@ const questionnaire = {
       isComplated: false,
       questions: [
         {
-          questionId: '',
-          description: '',
+          type: 'text',
+          questionId: 'yearly_income',
+          question: 'Yearly incomes',
+          description: 'Yearly income',
+          answer: ''
+        },
+        {
+          type: 'text',
+          questionId: 'monthly_income',
+          question: 'Monthly incomes',
+          description: 'Monthly income',
+          answer: ''
+        },
+        {
+          type: 'dropdown',
+          questionId: 'age_group',
+          question: 'Age',
+          description: 'Age',
+          options:[{value: "18_20", text: "18-20"},{value: "21_25", text:"21-25"},{value:"26_30", text:"26-30"}],
           answer: ''
         }
       ]
@@ -22,8 +39,9 @@ const questionnaire = {
       isComplated: false,
       questions: [
         {
-          questionId: '',
-          description: '',
+          questionId: 'yearly_income',
+          question: 'Yearly incomes',
+          description: 'Yearly income',
           answer: ''
         }
       ]

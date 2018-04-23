@@ -27,6 +27,7 @@ class QuestionnairePage extends Component{
   updateAnswer(event){
     const field = event.target.name;
     const value = event.target.value;
+    console.log('Field: ' + field + ' value: ' + value)
     const page = Object.assign({},this.state.currentPage)
     const item = page.questions.filter(question => question.questionId === field)
     if(item){

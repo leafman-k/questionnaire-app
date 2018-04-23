@@ -30,6 +30,14 @@ const questionnaire = {
           description: 'Age',
           options:[{value: "18_20", text: "18-20"},{value: "21_25", text:"21-25"},{value:"26_30", text:"26-30"}],
           answer: ''
+        },
+        {
+          type: 'radio',
+          questionId: 'service_level',
+          question: 'I was satisfied with service',
+          description: 'Service level',
+          options:[{value: "1", text: "Strongly agree"},{value: "2", text:"Somewhat agree"},{value:"3", text:"Neither agree or disagree"}, {value:"4", text:"Somewhat disagree"},{value:"5", text:"Stronly disagree"}],
+          answer: ''
         }
       ]
     },

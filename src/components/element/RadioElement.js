@@ -6,6 +6,8 @@ const RadioElement = ({elementData, onchange, error}) => {
 
   return (
     <div className="form-group">
+    <label htmlFor={elementData.questionId}>{elementData.question}</label>
+    <br/>
     {elementData.options.map((option, index) =>{
       return <RadioButton option={option} elementData={elementData} onchange={onchange} key={index}/>
     }
